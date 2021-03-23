@@ -22,6 +22,14 @@ Vue.prototype.deleteRequest=deleteRequest;
 router.beforeEach((to,from,next)=>{
   if(window.sessionStorage.getItem('tokenStr')){
     initMenu(router,store);
+    if(!window.sessionStorage.getItem('user')){
+      return getRequest('admin/info').then(resp=>{
+        if(resp){
+          window.sessionStorage.setItem('user',JSON.stringify(resp));
+          next()
+        }
+      })
+    }
     next()
   }else{
     if(to.path=='/'){

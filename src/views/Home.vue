@@ -31,6 +31,11 @@
 <script>
   export default {
     name: "Home",
+    data(){
+      return{
+        user: JSON.parse(window.sessionStorage.getItem('user'))
+      }
+    },
     methods:{
     },
     computed:{
